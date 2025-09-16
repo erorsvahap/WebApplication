@@ -41,9 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ilce\Ilce.cs" />
+    <Compile Include="Ilce\IlceBusiness.cs" />
     <Compile Include="Il\Il.cs" />
     <Compile Include="Il\IlBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Semt\Semt.cs" />
+    <Compile Include="Semt\SemtBusiness.cs" />
     <Compile Include="Ulke\Ulke.cs" />
     <Compile Include="Ulke\UlkeBusiness.cs" />
   </ItemGroup>

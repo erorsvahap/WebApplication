@@ -3,16 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebApplicationBusiness.Il
+namespace WebApplicationBusiness.Semt
 {
-    public class IlBusiness
+    public class SemtBusiness
     {
-
-        public IlBusiness() { }
+        public SemtBusiness() { }
         ConnectionTest cnn = new ConnectionTest();
         public void Params(IDbCommand cmd, Dictionary<string, object> parameters)
         {
@@ -24,70 +22,77 @@ namespace WebApplicationBusiness.Il
                 cmd.Parameters.Add(param);
             }
         }
-        public void AddıL( Il il )
-        {
-           
-            try
-            {
-                cnn.Open();
-                string sql = "INSERET INTO Il (IlAd,UlkeId) VALUES (@IlId,@UlkeId)";
-                var cmd = cnn.CreateCommand(sql, CommandType.Text);
-                Params(cmd, new Dictionary<string, object> 
-                {
-                    {"@IlAd",il.IlId} ,
-                     {"@UlkeId" , il.UlkeId}
-                });
-
-            }
-            catch (Exception ex)
-            {
-                cnn.Rollback();
-                throw new Exception("İl ekleme işlemi başarısız oldu:",ex);
-            }
-        }
-        public void UpdateIl(Il il)
+        public void AddSemt(Semt semt)
         {
             try
             {
                 cnn.Open();
-                string sql = "UPDATE Il SET IlAd = @IlAd WHERE IlId = @IlId";
+                string sql = "INSERET INTO Semt (SemtAd,IlceId) VALUES (@SemtId,@IlceId)";
                 var cmd = cnn.CreateCommand(sql, CommandType.Text);
                 Params(cmd, new Dictionary<string, object>
-                {
-                    {"@IlAd",il.IlId} ,
-                     {"@IlId",il.IlId}
-                });
-                cnn.Execute(cmd);
-                cnn.Commit();  
-            }
-            catch (Exception ex)
             {
-                cnn.Rollback();
-                throw new Exception(" İl güncelleme işlemi başarısız oldu:",ex);
-            }
-        }
-        public void DeleteIl( int IlId) 
-        {
-            try
-            { 
-                cnn.Open();
-                string sql = "DELETE FROM Il WHERE IlId= @ IlId";
-                var cmd = cnn.CreateCommand(sql, CommandType.Text);
-                Params(cmd, new Dictionary<string, object> 
-                {
-                    {"@IlId",IlId} 
-                });
+                {"@SemtAd",semt.SemtAd} ,
+                {"IlceId", semt.IlceId}
+            });
                 cnn.Execute(cmd);
                 cnn.Commit();
 
+            }
+            catch (Exception ex)
+            {
+                cnn.Rollback();
+                throw new Exception("Smet ekleme işlemi başarısız oldu:", ex);
+            }
+        }
+        public void UpdateSemt(Semt semt)
+        {
+            try
+            {
+                cnn.Open();
+
+                string sql = "UPDATE Smet SET SemteAd = @SemtAd  WHERE SemtId = @SemtId";
+                var cmd = cnn.CreateCommand(sql, CommandType.Text);
+
+                Params(cmd, new Dictionary<string, object>
+                    {
+                     {"@SemtAd", semt.SemtAd},
+                        {"@SemtId", semt.SemtId},
+
+                    });
+                cnn.Execute(cmd);
+                cnn.Commit();
+            }
+            catch (Exception ex)
+            {
+                cnn.Rollback();
+                throw new Exception("Semt güncelleme işlemi başarısız oldu", ex);
+            }
+
+        }
+        public void DeleteSemt(int semtid)
+        {
+
+            try
+            {
+                cnn.Open();
+
+                string sql = "DELETE FROM Semt WHERE SemtId = @SemtId";
+                var cmd = cnn.CreateCommand(sql, CommandType.Text);
+
+                Params(cmd, new Dictionary<string, object>
+                    {
+                        {"@SemtId",semtid}
+                    });
+
+                cnn.Execute(cmd);
+                cnn.Commit();
 
             }
             catch (Exception ex)
             {
                 cnn.Rollback();
-                throw new Exception("İl silme işlemi başarısız olud:",ex);
+                throw new Exception("Semt silme işlemi başarısız oldu", ex);
             }
-
         }
 
 
