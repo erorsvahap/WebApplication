@@ -42,12 +42,12 @@ namespace dbConnectionTest
                 _connection.Close();
             }
         }
-        public IDbCommand CreateCommand(string sql, CommandType type, int commanttimeout)
+        public IDbCommand CreateCommand(string sql, CommandType type)
         {
             IDbCommand cmd = _connection.CreateCommand();
             cmd.Transaction = _transaction;
             cmd.CommandType = type;
-            cmd.CommandTimeout = commanttimeout;
+            
             cmd.CommandText = sql;
             if (_transaction != null)
             {
@@ -87,11 +87,10 @@ namespace dbConnectionTest
         }
         public void Dispose()
         {
-            _transaction?.Dispose();
-            _connection?.Dispose();
-
-            _transaction = null;
+            _connection.Dispose();
+            _transaction.Dispose();
             _connection = null;
+            _transaction = null;
         }
     }
 }
