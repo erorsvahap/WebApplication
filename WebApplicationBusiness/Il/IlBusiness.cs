@@ -54,7 +54,7 @@ namespace WebApplicationBusiness.Il
                 var cmd = cnn.CreateCommand(sql, CommandType.Text);
                 Params(cmd, new Dictionary<string, object>
                 {
-                    {"@IlAd",il.IlId} ,
+                    {"@IlAd",il.IlAd} ,
                      {"@IlId",il.IlId}
                 });
                 cnn.Execute(cmd);
@@ -69,25 +69,24 @@ namespace WebApplicationBusiness.Il
         public void DeleteIl( int IlId) 
         {
             try
-            { 
+            {
                 cnn.Open();
-                string sql = "DELETE FROM Il WHERE IlId= @ IlId";
+                string sql = "DELETE FROM Il WHERE IlId= @IlId";
                 var cmd = cnn.CreateCommand(sql, CommandType.Text);
-                Params(cmd, new Dictionary<string, object> 
+                Params(cmd, new Dictionary<string, object>
                 {
-                    {"@IlId",IlId} 
+                    {"@IlId",IlId}
                 });
                 cnn.Execute(cmd);
                 cnn.Commit();
-
 
             }
             catch (Exception ex)
             {
                 cnn.Rollback();
-                throw new Exception("İl silme işlemi başarısız olud:",ex);
+                throw new Exception(" İl güncelleme işlemi başarısız oldu:", ex);
             }
-
+                
         }
 
 

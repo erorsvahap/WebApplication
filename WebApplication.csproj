@@ -246,6 +246,16 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="dbConnectionTest\dbConnectionTest.csproj">
+      <Project>{DE448805-1DE9-4069-8AC3-F183429B7CD2}</Project>
+      <Name>dbConnectionTest</Name>
+    </ProjectReference>
+    <ProjectReference Include="WebApplicationBusiness\WebApplicationBusiness.csproj">
+      <Project>{EC66DFA4-A89B-46D5-80C3-14A2E305B5A7}</Project>
+      <Name>WebApplicationBusiness</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

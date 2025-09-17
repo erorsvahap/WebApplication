@@ -40,5 +40,7 @@
             </section>
         </div>
     </main>
+         <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="true"></asp:GridView>
+
 
 </asp:Content>
