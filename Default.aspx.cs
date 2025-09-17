@@ -90,11 +90,91 @@ namespace WebApplication
             //GridView1.DataSource = ddt;
             //GridView1.DataBind(); // aralık sorgusu
 
+            // int ulkeId = 1; // Örnek ülke ID
+            // var cmd = cnn.CreateCommand("SELECT dbo.GetCityCountByCountry(@UlkeId)", CommandType.Text);
+            // var param = cmd.CreateParameter();
+            // param.ParameterName = "@UlkeId";
+            // param.Value = ulkeId;
+            // cmd.Parameters.Add(param);
+            // int IlCount = Convert.ToInt32(cnn.ExecuteScalar(cmd));
 
 
 
+            // int ulkeIdıl = 1; 
+            // var cmdIl = cnn.CreateCommand("SELECT * FROM dbo.GetCitiesByCountry(@UlkeId)", CommandType.Text);
+            // var prm = cmdIl.CreateParameter();
+            //prm.ParameterName = "@UlkeId";
+            // prm.Value = ulkeIdıl;
+            // cmdIl.Parameters.Add(prm);
 
+            // DataTable dtIl = cnn.Execute(cmdIl);
+            // GridView1.DataSource = dtIl;
+            // GridView1.DataBind(); 
+
+            var spCmd = cnn.CreateCommand("UpdateUlkeAdBuyuk", CommandType.StoredProcedure);
+
+            var param = spCmd.CreateParameter();
+            param.ParameterName = "@UlkeId";
+            param.Value = 1023;
+            spCmd.Parameters.Add(param);
+
+            cnn.Execute(spCmd);  
+            cnn.Commit();
+
+            DataTable dtu = cnn.Execute(spCmd);
+           
 
         }
+        protected void btnAddUlke_Click(object sender, EventArgs e)
+        {
+            string newCountry = txtUlkeAd.Text.Trim();
+            var cnn = new ConnectionTest();
+
+            var cmd = cnn.CreateCommand("ParamAddUlke", CommandType.StoredProcedure);
+            var param = cmd.CreateParameter();
+            param.ParameterName = "@UlkeAd";
+            param.Value = newCountry;
+            cmd.Parameters.Add(param);
+
+            cnn.Execute(cmd);
+            cnn.Commit();
+
+            cnn.Dispose();
+
+            txtUlkeAd.Text = "";
+            LoadGrid();
+        }
+        protected void btnDeleteUlke_Click(object sender, EventArgs e)
+        {
+            int ulkeId = Convert.ToInt32(txtUlkeId.Text);
+  
+            var cnn = new ConnectionTest();
+
+            var cmd = cnn.CreateCommand("ParamDeleteUlke", CommandType.StoredProcedure);
+            var param = cmd.CreateParameter();
+            param.ParameterName = "@UlkeId";
+            param.Value = ulkeId;
+            cmd.Parameters.Add(param);
+
+            cnn.Execute(cmd);
+            cnn.Commit();
+
+            cnn.Dispose(); 
+
+            txtUlkeId.Text = ""; 
+            LoadGrid();          
+        }
+
+        public void LoadGrid()
+        {
+            using (var cnn = new ConnectionTest())
+            {
+                var cmd = cnn.CreateCommand("SELECT * FROM ULKE", CommandType.Text);
+                DataTable dt = cnn.Execute(cmd);
+                GridView1.DataSource = dt;
+                GridView1.DataBind();
+            }
+        }
     }
+
 }
