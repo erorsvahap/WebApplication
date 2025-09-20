@@ -66,7 +66,9 @@ namespace dbConnectionTest
             if (_transaction != null)
             {
                 _transaction.Commit();
+
             }
+          
         }
         public DataTable Execute(IDbCommand cmd)
         {

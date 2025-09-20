@@ -93,7 +93,7 @@ namespace WebApplicationBusiness.Ulke
             catch (Exception ex)
             {
                 cnn.Rollback();
-                throw new Exception("Ülke güncelleme işlemi başarısız oldu:", ex);
+                throw new Exception("Ülke silme işlemi başarısız oldu:", ex);
             }
         }
 

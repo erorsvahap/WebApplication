@@ -24,15 +24,16 @@ namespace WebApplicationBusiness.Semt
         }
         public void AddSemt(Semt semt)
         {
+            ConnectionTest cnn = new ConnectionTest();
             try
             {
                 cnn.Open();
-                string sql = "INSERET INTO Semt (SemtAd,IlceId) VALUES (@SemtId,@IlceId)";
+                string sql = "INSERT INTO Semt (SemtAd,IlceId) VALUES (@SemtAd,@IlceId)";
                 var cmd = cnn.CreateCommand(sql, CommandType.Text);
                 Params(cmd, new Dictionary<string, object>
             {
                 {"@SemtAd",semt.SemtAd} ,
-                {"IlceId", semt.IlceId}
+                {"@IlceId", semt.IlceId}
             });
                 cnn.Execute(cmd);
                 cnn.Commit();
@@ -46,11 +47,12 @@ namespace WebApplicationBusiness.Semt
         }
         public void UpdateSemt(Semt semt)
         {
+            ConnectionTest cnn = new ConnectionTest();
             try
             {
                 cnn.Open();
 
-                string sql = "UPDATE Smet SET SemteAd = @SemtAd  WHERE SemtId = @SemtId";
+                string sql = "UPDATE Semt SET SemtAd = @SemtAd  WHERE SemtId = @SemtId";
                 var cmd = cnn.CreateCommand(sql, CommandType.Text);
 
                 Params(cmd, new Dictionary<string, object>
@@ -71,7 +73,7 @@ namespace WebApplicationBusiness.Semt
         }
         public void DeleteSemt(int semtid)
         {
-
+            ConnectionTest cnn = new ConnectionTest();
             try
             {
                 cnn.Open();

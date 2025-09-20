@@ -24,17 +24,17 @@ namespace WebApplicationBusiness.Il
                 cmd.Parameters.Add(param);
             }
         }
-        public void AddıL( Il il )
+        public void AddIl( Il il )
         {
-           
+            ConnectionTest cnn = new ConnectionTest();
             try
             {
                 cnn.Open();
-                string sql = "INSERET INTO Il (IlAd,UlkeId) VALUES (@IlId,@UlkeId)";
+                string sql = "INSERET INTO Il (IlAd,UlkeId) VALUES (@IlAd,@UlkeId)";
                 var cmd = cnn.CreateCommand(sql, CommandType.Text);
                 Params(cmd, new Dictionary<string, object> 
                 {
-                    {"@IlAd",il.IlId} ,
+                    {"@IlAd",il.IlAd} ,
                      {"@UlkeId" , il.UlkeId}
                 });
 
@@ -47,6 +47,7 @@ namespace WebApplicationBusiness.Il
         }
         public void UpdateIl(Il il)
         {
+            ConnectionTest cnn = new ConnectionTest();
             try
             {
                 cnn.Open();
@@ -66,8 +67,9 @@ namespace WebApplicationBusiness.Il
                 throw new Exception(" İl güncelleme işlemi başarısız oldu:",ex);
             }
         }
-        public void DeleteIl( int IlId) 
+        public void DeleteIl( int IlId)
         {
+            ConnectionTest cnn = new ConnectionTest();
             try
             {
                 cnn.Open();

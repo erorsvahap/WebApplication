@@ -29,7 +29,7 @@ namespace WebApplicationBusiness.Ilce
             try
             {
                 cnn.Open();
-                string sql = "INSERET INTO Ilce (IlceAd,IlId) VALUES (@IlId,@IlId)";
+                string sql = "INSERT INTO Ilce (IlceAd,IlId) VALUES (@IlId,@IlId)";
                 var cmd = cnn.CreateCommand(sql, CommandType.Text);
                 Params(cmd, new Dictionary<string, object>
             {
