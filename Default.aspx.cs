@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -42,9 +43,13 @@ namespace WebApplication
             //Ulke u2 = new Ulke { UlkeAd = "KOLOMBİYA", UlkeId = 1013 };
             //ub.UpdateUlke(u2);
             //ub.DeleteUlke(1010);
-            //IlBusiness ib = new IlBusiness();
-            //Il i1 = new Il { IlAd = "PAOK", UlkeId = 1015 };
-            //ib.AddIl(i1);
+            IlBusiness ib = new IlBusiness();
+            Il i1 = new Il { IlAd = "PAOK", UlkeId = 1015 };
+            if(i1.IlAd=="");
+            i1.IlAd = "hamza";
+            string aaa = i1.IlAd;
+            ib.AddIl(i1);
+
             //Il i2 = new Il { IlAd = "ANKARA", IlId = 17 };
             //ib.UpdateIl(i2);
             //ib.DeleteIl(19);
@@ -168,6 +173,41 @@ namespace WebApplication
 
             //DataTable dtp = cnn.Execute(cmd);
         }
+        protected void btnAddSehirler_Click(object sender, EventArgs e)
+        {
+            if (!int.TryParse(txtUlkeIdd.Text.Trim(), out int ulkeId))
+                return;
+            string[] sehirler = txtIlAdlari.Text.Split(
+                new[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries);
+
+            
+            using (var cnn = new ConnectionTest())
+            {
+                foreach (string sehir in sehirler)
+                {
+                    var cmd = cnn.CreateCommand("ParamAddIl", CommandType.StoredProcedure);
+
+                    var p1 = cmd.CreateParameter();
+                    p1.ParameterName = "@IlAd";
+                    p1.Value = sehir.Trim();
+                    cmd.Parameters.Add(p1);
+
+                    var p2 = cmd.CreateParameter();
+                    p2.ParameterName = "@UlkeId";
+                    p2.Value = ulkeId;
+                    cmd.Parameters.Add(p2);
+
+                    cnn.Execute(cmd);
+                }
+                cnn.Commit();
+            }
+
+          
+            txtIlAdlari.Text = "";
+            LoadGridIl();
+        }
+
+
         protected void btnGetirSehir_Click(object sender, EventArgs e)
         {
             string newulke = txtUlkeAdı.Text.Trim();
@@ -198,7 +238,7 @@ namespace WebApplication
         protected void btnAddIl_Click(object sender, EventArgs e)
         {
             string newIl = txtIlAd.Text.Trim();
-            int newulkeıd =  int.Parse(txtUlkeIdd.Text);
+            int newulkeıd = int.Parse(txtUlkeIdd.Text);
             var cnn = new ConnectionTest();
             var cmd = cnn.CreateCommand("ParamAddIl", CommandType.StoredProcedure);
             var param1 = cmd.CreateParameter();
@@ -214,7 +254,7 @@ namespace WebApplication
             cnn.Commit();
 
             txtIlAd.Text = "";
-            txtUlkeIdd.Text= "";
+            txtUlkeIdd.Text = "";
 
             LoadGridIl();
 
@@ -224,7 +264,7 @@ namespace WebApplication
         protected void btnAddUlke_Click(object sender, EventArgs e)
         {
             string newCountry = txtUlkeAd.Text.Trim();
-         
+
             var cnn = new ConnectionTest();
             var cmd = cnn.CreateCommand("ParamAddUlke", CommandType.StoredProcedure);
             var param1 = cmd.CreateParameter();

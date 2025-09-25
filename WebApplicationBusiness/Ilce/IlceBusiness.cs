@@ -46,6 +46,7 @@ namespace WebApplicationBusiness.Ilce
                 throw new Exception("İlçe ekleme işlemi başarısız oldu:",ex);
             }           
         }
+        
         public void UpdateIlce(Ilce ılce)
         {
             try

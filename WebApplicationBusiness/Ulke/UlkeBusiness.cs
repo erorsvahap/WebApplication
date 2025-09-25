@@ -86,7 +86,7 @@ namespace WebApplicationBusiness.Ulke
                 {
                     {"@UlkeId", UlkeId}
                 });
-                cnn.Execute(cmd);
+                cnn.Execute(cmd); // executenonqury de yazılabılır 
                 cnn.Commit();
 
             }

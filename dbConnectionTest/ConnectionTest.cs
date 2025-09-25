@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -16,7 +17,8 @@ namespace dbConnectionTest
         IDbTransaction _transaction;
         public ConnectionTest()
         {
-            this._connectionstring = "Data Source=DESKTOP-1DT9AO1\\SQLEXPRESS;Initial Catalog=TestDB;Integrated Security=True;";
+            this._connectionstring = ConfigurationManager.ConnectionStrings["mydb"].ConnectionString.ToString();
+                //"Data Source=DESKTOP-1DT9AO1\\SQLEXPRESS;Initial Catalog=TestDB;Integrated Security=True;";
             this._connection = new SqlConnection(this._connectionstring);
             this._connection.Open();
             this._transaction = this._connection.BeginTransaction();
