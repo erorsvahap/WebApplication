@@ -17,7 +17,7 @@ namespace dbConnectionTest
         IDbTransaction _transaction;
         public ConnectionTest()
         {
-            this._connectionstring = ConfigurationManager.ConnectionStrings["mydb"].ConnectionString.ToString();
+            this._connectionstring = ConfigurationManager.ConnectionStrings["MyDBConnections"].ConnectionString.ToString();
                 //"Data Source=DESKTOP-1DT9AO1\\SQLEXPRESS;Initial Catalog=TestDB;Integrated Security=True;";
             this._connection = new SqlConnection(this._connectionstring);
             this._connection.Open();

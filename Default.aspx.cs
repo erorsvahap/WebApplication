@@ -1,4 +1,5 @@
-﻿using dbConnectionTest;
+﻿using DataAccess;
+using dbConnectionTest;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -7,9 +8,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using WebApplicationBusiness.Il;
-using WebApplicationBusiness.Semt;
-using WebApplicationBusiness.Ulke;
+using WebApplicationEntities;
+
 
 namespace WebApplication
 {
@@ -43,12 +43,12 @@ namespace WebApplication
             //Ulke u2 = new Ulke { UlkeAd = "KOLOMBİYA", UlkeId = 1013 };
             //ub.UpdateUlke(u2);
             //ub.DeleteUlke(1010);
-            IlBusiness ib = new IlBusiness();
-            Il i1 = new Il { IlAd = "PAOK", UlkeId = 1015 };
-            if(i1.IlAd=="");
-            i1.IlAd = "hamza";
-            string aaa = i1.IlAd;
-            ib.AddIl(i1);
+            //IlBusiness ib = new IlBusiness();
+            //Il i1 = new Il { IlAd = "PAOK", UlkeId = 1015 };
+            //if(i1.IlAd=="");
+            //i1.IlAd = "hamza";
+            //string aaa = i1.IlAd;
+            //ib.AddIl(i1);
 
             //Il i2 = new Il { IlAd = "ANKARA", IlId = 17 };
             //ib.UpdateIl(i2);
@@ -172,6 +172,15 @@ namespace WebApplication
             //cmd.Parameters.Add(param);
 
             //DataTable dtp = cnn.Execute(cmd);
+            if (!IsPostBack)
+            {
+                var repo = new DataRepository();
+
+                repo.Add(new Country { Name = "AAA" });
+                repo.Add(new City { Name = "YOZGAT", CountryId = 1 });
+                repo.Add(new District { Name = "YOZLUK", CityId = 1 });
+                repo.Add(new Neighborhood { Name = "YOZTUK", DistrictId = 1 });
+            }
         }
         protected void btnAddSehirler_Click(object sender, EventArgs e)
         {
