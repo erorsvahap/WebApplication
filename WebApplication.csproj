@@ -247,11 +247,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataAccess\DataAccess.csproj">
+    <ProjectReference Include="DataAccess\DataAccess.csproj">
       <Project>{B4B03CDE-F717-4D24-8DC5-CE4E640052C8}</Project>
       <Name>DataAccess</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WebApplicationEntities\WebApplicationEntities.csproj">
+    <ProjectReference Include="WebApplicationEntities\WebApplicationEntities.csproj">
       <Project>{FC7BEF3F-0108-49B9-9402-F7AA1E8DD307}</Project>
       <Name>WebApplicationEntities</Name>
     </ProjectReference>

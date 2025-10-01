@@ -51,7 +51,7 @@
     <Compile Include="Country.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WebApplication\dbConnectionTest\dbConnectionTest.csproj">
+    <ProjectReference Include="..\dbConnectionTest\dbConnectionTest.csproj">
       <Project>{DE448805-1DE9-4069-8AC3-F183429B7CD2}</Project>
       <Name>dbConnectionTest</Name>
     </ProjectReference>
