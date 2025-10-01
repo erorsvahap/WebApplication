@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using WebApplicationBusiness.Ulke;
 using WebApplicationEntities;
 
 
@@ -172,16 +173,33 @@ namespace WebApplication
             //cmd.Parameters.Add(param);
 
             //DataTable dtp = cnn.Execute(cmd);
-            if (!IsPostBack)
-            {
-                var repo = new DataRepository();
+            //if (!IsPostBack)
+            //{
+            //    var repo = new DataRepository();
+            //    repo.
+            //    repo.Add(new Country { Name = "AAA" });
+            //    repo.Add(new City { Name = "YOZGAT", CountryId = 1 });
+            //    repo.Add(new District { Name = "YOZLUK", CityId = 1 });
+            //    repo.Add(new Neighborhood { Name = "YOZTUK", DistrictId = 1 });
+            //Country country = new Country() { UlkeAd = "PERU" };
+            //country.Insert();
+            //City city = new City() { UlkeId = 1, IlAd = "MARAŞ" };
+            //city.Insert();
+            //District district = new District() { IlId = 1, IlceAd = "EEEE" };
+            //district.Insert();
+            Country country1 = new Country() { Id= 1060 };
+            country1.Delete();
+            City city1 = new City() { Id = 42 };
+            city1.Delete();
+            District district1 = new District() { Id = 21 };
+            district1.Delete();
 
-                repo.Add(new Country { Name = "AAA" });
-                repo.Add(new City { Name = "YOZGAT", CountryId = 1 });
-                repo.Add(new District { Name = "YOZLUK", CityId = 1 });
-                repo.Add(new Neighborhood { Name = "YOZTUK", DistrictId = 1 });
-            }
-        }
+
+
+         }
+           
+            
+
         protected void btnAddSehirler_Click(object sender, EventArgs e)
         {
             if (!int.TryParse(txtUlkeIdd.Text.Trim(), out int ulkeId))
@@ -189,7 +207,7 @@ namespace WebApplication
             string[] sehirler = txtIlAdlari.Text.Split(
                 new[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries);
 
-            
+
             using (var cnn = new ConnectionTest())
             {
                 foreach (string sehir in sehirler)
@@ -211,7 +229,7 @@ namespace WebApplication
                 cnn.Commit();
             }
 
-          
+
             txtIlAdlari.Text = "";
             LoadGridIl();
         }
