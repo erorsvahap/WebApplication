@@ -9,9 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dbConnectionTest", "dbConne
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplicationBusiness", "WebApplicationBusiness\WebApplicationBusiness.csproj", "{EC66DFA4-A89B-46D5-80C3-14A2E305B5A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplicationEntities", "..\WebApplicationEntities\WebApplicationEntities.csproj", "{FC7BEF3F-0108-49B9-9402-F7AA1E8DD307}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplicationEntities", "WebApplicationEntities\WebApplicationEntities.csproj", "{FC7BEF3F-0108-49B9-9402-F7AA1E8DD307}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "..\DataAccess\DataAccess.csproj", "{B4B03CDE-F717-4D24-8DC5-CE4E640052C8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{B4B03CDE-F717-4D24-8DC5-CE4E640052C8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
