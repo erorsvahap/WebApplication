@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace WebApplicationEntities
 {
-    public abstract class BaseEntity 
+    public abstract class BaseEntity
     {
-       
+
 
         public abstract string TableName { get; } // Her tablo kendi adını burada verir
 
@@ -63,7 +63,7 @@ namespace WebApplicationEntities
 
             foreach (var p in this.GetType().GetProperties())
             {
-                if(p.IsDefined(typeof(DbIdentityAttribute), true ))
+                if (p.IsDefined(typeof(DbIdentityAttribute), true))
                 {
                     var colAttr = (DbColumnNameAttribute)p.GetCustomAttribute(typeof(DbColumnNameAttribute)); //Bu property üzerinde [DbColumnName("...")] attributu var mı diye kontrol eder
                     idName = colAttr?.ColumnName ?? p.Name; // varsa eger isme  " " içindkini yaz yoksa eger syoksa sql de ki kolonu kullan
@@ -80,15 +80,15 @@ namespace WebApplicationEntities
             {
                 try
                 {
-                    cnn.Open();
-                    var cmd = cnn.CreateCommand(sql, CommandType.Text);
-                    var prm = cmd.CreateParameter();
-                    prm.ParameterName = "@" + idName;
-                    prm.Value = idprop;
-                    cmd.Parameters.Add(prm);
+                        cnn.Open();
+                        var cmd = cnn.CreateCommand(sql, CommandType.Text);
+                        var prm = cmd.CreateParameter();
+                        prm.ParameterName = "@" + idName;
+                        prm.Value = idprop;
+                        cmd.Parameters.Add(prm);
 
-                    cnn.ExecuteNonQuery(cmd);
-                    cnn.Commit();
+                        cnn.ExecuteNonQuery(cmd);
+                        cnn.Commit();
                 }
                 catch
                 {
@@ -106,13 +106,121 @@ namespace WebApplicationEntities
 
         }
 
+        public void Update()
+        {
+            string idName = "";
+            int idValue = 0;
+            var setList = new List<string>();
 
-     
-        
-        
+
+            foreach (var p in this.GetType().GetProperties())             // Identity kolonunu bul
+
+            {
+                if (p.Name.Equals("TableName", StringComparison.OrdinalIgnoreCase)) // tabbloname ismini atla
+                    continue;
+                if (p.IsDefined(typeof(DbIdentityAttribute), true))
+                {
+                    var colAttr = (DbColumnNameAttribute)p.GetCustomAttribute(typeof(DbColumnNameAttribute));
+                    idName = colAttr?.ColumnName ?? p.Name; // eger attributee kolon adı verilmiş ise onu aldegılse sqlde ki ni al
+                    idValue = (int)p.GetValue(this); // properti degeri al
+                    break;
+                }
+            }
+
+            foreach (var p in this.GetType().GetProperties())     // identity olmayan tüm kolonlar
+            {
+                if (p.IsDefined(typeof(DbIdentityAttribute), true)) continue; //ıdentty olanı alma atla
+                if (p.Name.Equals("TableName", StringComparison.OrdinalIgnoreCase)) 
+                    continue;
+
+                var colAttr = (DbColumnNameAttribute)p.GetCustomAttribute(typeof(DbColumnNameAttribute));
+                string colName = colAttr?.ColumnName ?? p.Name;
+                setList.Add($"{colName} = @{colName}");
+            }
+
+            string setString = string.Join(", ", setList); // tek string haline gtir
+
+            string sql = $"UPDATE {TableName} SET {setString} WHERE {idName} = @{idName}";
+            using (var cnn = new ConnectionTest())
+            {
+                try
+                {
+                    cnn.Open();
+                    var cmd = cnn.CreateCommand(sql, CommandType.Text);
 
 
-        
+                    foreach (var p in this.GetType().GetProperties())
+                    {
+
+                        if (p.IsDefined(typeof(DbIdentityAttribute), true)) continue; 
+                        var colAttr = (DbColumnNameAttribute)p.GetCustomAttribute(typeof(DbColumnNameAttribute));
+                        string colName = colAttr?.ColumnName ?? p.Name;
+
+                        var prm = cmd.CreateParameter();
+                        prm.ParameterName = "@" + colName;
+                        prm.Value = p.GetValue(this) ?? DBNull.Value;
+                        cmd.Parameters.Add(prm);
+                    }
+
+                    var idPrm = cmd.CreateParameter();
+                    idPrm.ParameterName = "@" + idName;
+                    idPrm.Value = idValue;
+                    cmd.Parameters.Add(idPrm);
+
+                    cnn.ExecuteNonQuery(cmd);
+                    cnn.Commit();
+                }
+                catch
+                {
+                    cnn.Rollback();
+                    throw;
+                }
+                finally
+                {
+                    cnn.Close();
+                }
+            }
+        }
+
+        public void SoftDelete()
+        {
+            string idName = "";
+            int idValue = 0;
+
+            foreach (var p in this.GetType().GetProperties())
+            {
+                if (p.IsDefined(typeof(DbIdentityAttribute), true))
+                {
+                    var colAttr = (DbColumnNameAttribute)p.GetCustomAttribute(typeof(DbColumnNameAttribute));
+                    idName = colAttr?.ColumnName ?? p.Name;
+                    idValue = (int)p.GetValue(this);
+                    break;
+                }
+            }
+
+            string sql = $"UPDATE {TableName} SET IsDeleted = 1 WHERE {idName} = @{idName}";
+
+            using (var cnn = new ConnectionTest())
+            {
+                cnn.Open();
+                var cmd = cnn.CreateCommand(sql, CommandType.Text);
+
+                var prm = cmd.CreateParameter();
+                prm.ParameterName = "@" + idName;
+                prm.Value = idValue;
+                cmd.Parameters.Add(prm);
+
+                cnn.ExecuteNonQuery(cmd);
+                cnn.Commit();
+                cnn.Close();
+            }
+        }
+
+
+
+
+
+
     }
 
 }

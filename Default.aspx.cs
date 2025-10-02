@@ -187,13 +187,18 @@ namespace WebApplication
             //city.Insert();
             //District district = new District() { IlId = 1, IlceAd = "EEEE" };
             //district.Insert();
-            Country country1 = new Country() { Id= 1060 };
-            country1.Delete();
-            City city1 = new City() { Id = 42 };
-            city1.Delete();
-            District district1 = new District() { Id = 21 };
-            district1.Delete();
+            //Country country1 = new Country() { Id= 1060 };
+            //country1.Delete();
+            //City city1 = new City() { Id = 42 };
+            //city1.Delete();
+            //District district1 = new District() { Id = 21 };
+            //district1.Delete();
 
+            //Country country = new Country() { Id = 1050, UlkeAd = "GÜRCİSTAN" };
+            //country.Update();
+
+            Country country = new Country() { Id = 1051 };
+            country.SoftDelete();
 
 
          }
