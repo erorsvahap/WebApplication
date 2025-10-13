@@ -1,5 +1,6 @@
 ﻿using DataAccess;
 using dbConnectionTest;
+using MyProjectDataEF;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,7 +10,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using WebApplicationBusiness.Ulke;
-using WebApplicationEntities;
+//using WebApplicationEntities;
 
 
 namespace WebApplication
@@ -18,8 +19,8 @@ namespace WebApplication
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            dbConnectionTest.ConnectionTest cnn = new dbConnectionTest.ConnectionTest();
-            DataTable dt = new DataTable();
+            //dbConnectionTest.ConnectionTest cnn = new dbConnectionTest.ConnectionTest();
+            //DataTable dt = new DataTable();
 
 
             //string sql = "select * from ULKE";
@@ -197,13 +198,76 @@ namespace WebApplication
             //Country country = new Country() { Id = 1050, UlkeAd = "GÜRCİSTAN" };
             //country.Update();
 
-            Country country = new Country() { Id = 1051 };
-            country.SoftDelete();
+            //Country country = new Country() { Id = 1051 };
+            //country.SoftDelete();
 
 
-         }
-           
-            
+            /// ENTİTY FREAMWORK ALANINDAKİ TSTLER
+
+            //var manager = new MyDataManager<Country>();
+            // Country country = new Country();
+            //country.UlkeAd = "HİRVATİSTAN";
+            //manager.Insert(country);
+
+            //var manager2 = new MyDataManager<City>();
+            //City city = new City();
+            //city.UlkeId= 1;
+            //city.IlAd = "RİZE";
+            //manager2.Insert(city);  
+
+            //var manager3 = new MyDataManager<District>();
+            //District district = new District() { IlceAd = "UUU", IlId =33 };
+            //manager3.Insert(district);
+
+
+
+            //var manager4 = new MyDataManager<Country>();
+            //Country country = new Country()
+            //{
+            //    Id = 1051  // bunlar kesin oldugunu bıldgımız ıd ler için eger yoksa hata verir 
+            //};
+            //manager4.Delete(country);
+
+            // var manager5 = new MyDataManager<City>();
+            //City city = new City() { Id = 38 }; // bunlar kesin oldugunu bıldgımız ıd ler için eger yoksa hata verir 
+            //manager5.Delete(city); 
+
+
+            // bu ise ıd olmadanda calsıır hata mesajına gerek yok 
+            //var manager6 = new MyDataManager<Country>();
+            //manager6.DeleteById(1068);
+            //var manager7= new MyDataManager<City>();
+            //manager7.DeleteById(35);
+
+            //var manager7 = new MyDataManager<Country>();
+            //Country country = new Country();
+            ////country.UlkeAd = "ATLANTIK";
+            ////manager7.Insert(country);
+            //country.Id = 1067;
+            //manager7.Delete(country); 
+
+            // UPDATE
+
+            //var manager8= new MyDataManager<Country>();
+            //Country country = new Country() { Id = 1052, UlkeAd = "PORTEKİZ" };
+            //manager8.Update(country);
+            //var manager9 = new MyDataManager<City>();
+            //City city = new City() { Id = 31, IlAd = "BİNGÖL",UlkeId=1 }; // ulke ıd giremyince hata alıyorum
+            //manager9.Update(city);
+            //var m1 = new MyDataManager<District>();
+            //District district = new District() { Id =24, IlId=1,IlceAd="BEYAZSU" };
+            //m1.Update(district);
+            //var m2 = new MyDataManager<Neighborhood>();
+            //Neighborhood neighborhood = new Neighborhood() { Id = 10, SemtAd = "OTLUK", IlceId = 1};
+            //m2.Update(neighborhood);
+             var m3= new MyDataManager<City>();
+            City city = new City() { Id = 33, IlAd = "AĞRI"};
+            m3.Update(city);
+
+
+            }
+
+
 
         protected void btnAddSehirler_Click(object sender, EventArgs e)
         {

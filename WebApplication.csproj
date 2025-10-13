@@ -251,6 +251,10 @@
       <Project>{B4B03CDE-F717-4D24-8DC5-CE4E640052C8}</Project>
       <Name>DataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="MyProjectDataEF\MyProjectDataEF.csproj">
+      <Project>{A3D273D6-CA8D-45C3-BC2B-BE25C5638443}</Project>
+      <Name>MyProjectDataEF</Name>
+    </ProjectReference>
     <ProjectReference Include="WebApplicationEntities\WebApplicationEntities.csproj">
       <Project>{FC7BEF3F-0108-49B9-9402-F7AA1E8DD307}</Project>
       <Name>WebApplicationEntities</Name>
