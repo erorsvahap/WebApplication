@@ -260,9 +260,16 @@ namespace WebApplication
             //var m2 = new MyDataManager<Neighborhood>();
             //Neighborhood neighborhood = new Neighborhood() { Id = 10, SemtAd = "OTLUK", IlceId = 1};
             //m2.Update(neighborhood);
-             var m3= new MyDataManager<City>();
-            City city = new City() { Id = 33, IlAd = "AĞRI"};
-            m3.Update(city);
+            // var m3= new MyDataManager<City>();
+            //City city = new City() { Id = 33, IlAd = "AĞRI"};
+            //m3.Update(city);
+
+
+            //var data= new DataRepository<vahap>();
+            //Country country = new Country() { UlkeAd = "TAYLAND" };
+            //data.Add(country);
+
+            
 
 
             }

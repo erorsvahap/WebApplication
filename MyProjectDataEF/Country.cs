@@ -15,9 +15,9 @@ namespace MyProjectDataEF
 
         [Column("UlkeId")]
         [Key]
-        public override int Id { get; set; }
+        public   int Id { get; set; }
     }
-    public class vahap : MyProjectEntity
+    public class vahap 
     {
         public int v { get; set; }
     }

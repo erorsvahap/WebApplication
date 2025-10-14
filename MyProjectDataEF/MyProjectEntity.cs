@@ -13,5 +13,6 @@ namespace MyProjectDataEF
 
             public virtual int Id { get; set; }  // tüm tablolarda ortak Id
 
+
     }
 }
